@@ -1,14 +1,16 @@
-/* Style for individual squares on the board */
-.square {
-    height: 50px;
-    width: 50px;
-    border: 1px solid black;
-    background-color: white;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 24px;
+body {
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-#status-message {
-    font-size: 1.2rem;
+/* Style for check list items */
+.list-item {
+    font-size: 1.3rem;
+}
+
+#list-item-checked {
+    font-size: 14px;
+}
+
+#list-item-checkbox:checked {
+    background-color: #00b200;
 }

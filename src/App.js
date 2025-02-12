@@ -1,10 +1,12 @@
+import ListItem from "./components/ListItem";
+
 export default function App() {
 
   return (
     <>
       {/* Container for all the page content */}
       <div className="mt-3">
-        <p>Hello world!</p>
+        <ListItem itemInfo={{title: 'Hello world', lastModifiedTime: new Date(), isChecked: false}}></ListItem>
       </div>
     </>
   );

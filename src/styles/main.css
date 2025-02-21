@@ -2,7 +2,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Style for check list items */
+/* --- Style for check list items --- */
 .list-item {
     font-size: 1.3rem;
 }
@@ -11,6 +11,8 @@ body {
     font-size: 14px;
 }
 
-#list-item-checkbox:checked {
+.li-checkbox:checked {
     background-color: #198754;
 }
+/* ---------------------------------- */
+

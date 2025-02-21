@@ -3,15 +3,15 @@ export default function NewItemForm({handleNewItem}) {
   const [newItem, setNewItem] = useState("");
 
   /* This function handles when the user clicks "Add Item" */
-  function handleAddItem(itemText) {
-    if (!itemText) {
+  function handleAddItem() {
+    if (!newItem) {
       // The item text is empty, so don't add it.
       return;
     }
 
     // Call the callback function to handle this item
     // NOTE: The item is supposed to be an object, not just the text as a string.
-    handleNewItem({title: itemText, lastModifiedTime: new Date(), isChecked: false});
+    handleNewItem({id: crypto.randomUUID(), title: newItem, lastModifiedTime: new Date(), completed: false});
 
     // Clear the input field
     setNewItem("");

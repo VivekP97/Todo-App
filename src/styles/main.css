@@ -14,5 +14,11 @@ body {
 .li-checkbox:checked {
     background-color: #198754;
 }
+
+.delete-icon {
+    font-size: 1.5em;
+    color: red;
+    cursor: pointer;
+}
 /* ---------------------------------- */
 

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "../styles/main.css";
+import { MdDelete } from "react-icons/md";
 
 export default function ListItem({ itemInfo, itemIndex, handleDeleteItem, handleCheckboxToggle }) {
   return (
@@ -9,7 +10,9 @@ export default function ListItem({ itemInfo, itemIndex, handleDeleteItem, handle
       <label className="list-item flex-grow-1" htmlFor={`li-checkbox-${itemInfo.id}`}>{itemInfo.title}</label>
 
       {/* Button to delete an item */}
-      <button className="btn btn-danger btn-sm ms-auto me-4 align-self-start" onClick={() => {handleDeleteItem(itemInfo.id)}}>Delete</button>
+      <div className="ms-auto me-4">
+        <MdDelete className="delete-icon" onClick={() => {handleDeleteItem(itemInfo.id)}}/>
+      </div>
     </li>
   );
 }

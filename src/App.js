@@ -53,6 +53,30 @@ export default function App() {
     }
   }
 
+  /** 
+   * This function handles when a list item's priority setting is toggled. 
+   * @param id - The ID of the list item to toggle
+   * @param newVal - The new state of the toggle
+   * */
+  function handlePriorityToggle(id, newVal) {
+    console.log("[handlePriorityToggle] Triggered for: ", id);
+
+    // Confirm that 'id' is not empty
+    if (!id) {
+      console.log("[handlePriorityToggle] ID is empty!");
+      return;
+    }
+
+    // Find the index of the given ID
+    let newAllItems = allItems.slice();
+    let i = newAllItems.findIndex(elem => elem.id === id);
+    if (i >= 0) {
+      // We were able to find the ID 
+      newAllItems[i].priority = !newAllItems[i].priority;
+      setAllItems(newAllItems);
+    }
+  }
+
   return (
     <>
       {/* Container for all the page content */}
@@ -62,7 +86,7 @@ export default function App() {
           <NewItemForm handleNewItem={addItemToList} />
         </div>
         <hr className="my-3"/>
-        <List items={allItems} handleDeleteItem={removeItemById} handleCheckboxToggle={handleCheckboxToggle} />
+        <List items={allItems} handleDeleteItem={removeItemById} handleCheckboxToggle={handleCheckboxToggle} handlePriorityToggle={handlePriorityToggle} />
       </div>
     </>
   );

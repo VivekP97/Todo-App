@@ -16,9 +16,27 @@ body {
 }
 
 .delete-icon {
-    font-size: 1.5em;
     color: red;
+    font-size: 1.7em;
     cursor: pointer;
+}
+
+/* Style for regular (non-priority) list items */
+.non-priority-icon {
+    color: yellow;
+    font-size: 1.6em;
+    cursor: pointer;
+    stroke: black;
+    stroke-width: 4px;
+}
+
+/* Style for priority list items */
+.priority-icon {
+    color: yellow;
+    font-size: 1.6em;
+    cursor: pointer;
+    stroke: black;
+    stroke-width: 4px;
 }
 /* ---------------------------------- */
 

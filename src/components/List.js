@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ListItem from "./ListItem";
 
-export default function List({ items, handleDeleteItem, handleCheckboxToggle }) {
+export default function List({ items, handleDeleteItem, handleCheckboxToggle, handlePriorityToggle }) {
   return (
     <>
       <div>
@@ -14,6 +14,7 @@ export default function List({ items, handleDeleteItem, handleCheckboxToggle }) 
                 itemInfo={item} 
                 handleDeleteItem={handleDeleteItem} 
                 handleCheckboxToggle={handleCheckboxToggle} 
+                handlePriorityToggle={handlePriorityToggle}
               />
             );
           })}

@@ -17,6 +17,14 @@ export default function NewItemForm({handleNewItem}) {
     setNewItem("");
   }
 
+  /* Handle keydown events for the input field */
+  function handleKeyDown(e) {
+    if (e.key === "Enter") {
+      // The Enter key was pressed, so try to add the item in the input field.
+      handleAddItem();
+    }
+  }
+
   return (
   <>
     <div>
@@ -27,7 +35,8 @@ export default function NewItemForm({handleNewItem}) {
         className="form-control w-100" 
         placeholder="Enter a new item..." 
         maxLength={100}
-        onChange={e => setNewItem(e.target.value)} />
+        onChange={e => setNewItem(e.target.value)} 
+        onKeyDown={handleKeyDown}/>
     </div>
     <div className="d-flex justify-content-center mt-2 gap-2">
       <button className="btn btn-success w-50" onClick={handleAddItem}>Add Item</button>

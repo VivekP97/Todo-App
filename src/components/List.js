@@ -6,10 +6,11 @@ export default function List({ items, handleDeleteItem, handleCheckboxToggle }) 
     <>
       <div>
         <ul>
-          {items.map(item => {
+          {items.map((item, i) => {
             return (
               <ListItem 
-                key={item.id} 
+                key={item.id}
+                itemIndex={i}
                 itemInfo={item} 
                 handleDeleteItem={handleDeleteItem} 
                 handleCheckboxToggle={handleCheckboxToggle} 

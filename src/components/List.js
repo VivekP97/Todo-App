@@ -20,6 +20,8 @@ export default function List({ items, handleDeleteItem, handleCheckboxToggle, ha
             <option value="reverse-alphabetical">Reverse Alphabetical</option>
             <option value="priority-first">Priority First</option>
             <option value="priority-last">Priority Last</option>
+            <option value="completed-first">Completed First</option>
+            <option value="completed-last">Completed Last</option>
           </select>
           {/* <button className="btn btn-success btn-sm dropdown-toggle" id="sort-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Sort <MdSort />

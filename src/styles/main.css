@@ -7,8 +7,10 @@ body {
     font-size: 1.3rem;
 }
 
-#list-item-checked {
-    font-size: 14px;
+/* A list item that has been completed. */
+.list-item-checked {
+    color: #919191;
+    text-decoration: line-through;
 }
 
 .li-checkbox:checked {

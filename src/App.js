@@ -167,5 +167,33 @@ function sortItems(items, sortOption) {
         }
       });
       break;
+
+    case "completed-first":
+      items.sort((a, b) => {
+        if (a.completed) {
+          // Item 'a' is completed so put it first (it doesn't matter if 'b' is also completed)
+          return -1;
+        } else if (b.completed) {
+          // Item 'b' is completed so put it first
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+      break;
+
+    case "completed-last":
+      items.sort((a, b) => {
+        if (!a.completed) {
+          // Item 'a' is completed so put it first (it doesn't matter if 'b' is also completed)
+          return -1;
+        } else if (!b.priority) {
+          // Item 'b' is completed so put it first
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+      break;
   }
 }

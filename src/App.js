@@ -4,7 +4,8 @@ import NewItemForm from "./components/NewItemForm";
 
 export default function App() {
   const [allItems, setAllItems] = useState([]); 
-
+  const [sortOption, setSortOption] = useState("alphabetical");
+  
   /* This function adds the given item to the current list. */
   function addItemToList(newItem) {
     // Don't add item if the title is empty.
@@ -14,6 +15,10 @@ export default function App() {
 
     let newItemsList = allItems.slice();
     newItemsList.push(newItem);
+
+    // re-sort the items
+    sortItems(newItemsList, sortOption);
+
     setAllItems(newItemsList);
   }
 
@@ -35,11 +40,11 @@ export default function App() {
    * @param newVal - The new state of the checkbox
    * */
   function handleCheckboxToggle(id, newVal) {
-    console.log("[handleCheckboxToggle] Triggered for: ", id, newVal);
+    console.log("[App][handleCheckboxToggle] Triggered for: ", id, newVal);
 
     // Confirm that 'id' is not empty
     if (!id) {
-      console.log("[handleCheckboxToggle] ID is empty!");
+      console.log("[App][handleCheckboxToggle] ID is empty!");
       return;
     }
 
@@ -59,11 +64,11 @@ export default function App() {
    * @param newVal - The new state of the toggle
    * */
   function handlePriorityToggle(id, newVal) {
-    console.log("[handlePriorityToggle] Triggered for: ", id);
+    console.log("[App][handlePriorityToggle] Triggered for: ", id);
 
     // Confirm that 'id' is not empty
     if (!id) {
-      console.log("[handlePriorityToggle] ID is empty!");
+      console.log("[App][handlePriorityToggle] ID is empty!");
       return;
     }
 
@@ -77,6 +82,18 @@ export default function App() {
     }
   }
 
+  // This function sorts 'items' by the selected sort order
+  function handleSortSelection(selectedSortOption) {
+    console.log("[App][sortItems] Selected: " + selectedSortOption);
+
+    let sortedItems = allItems.slice();
+    sortItems(sortedItems, selectedSortOption);
+
+    // update state variables with new values
+    setSortOption(selectedSortOption);
+    setAllItems(sortedItems);
+  }
+
   return (
     <>
       {/* Container for all the page content */}
@@ -86,8 +103,69 @@ export default function App() {
           <NewItemForm handleNewItem={addItemToList} />
         </div>
         <hr className="my-3"/>
-        <List items={allItems} handleDeleteItem={removeItemById} handleCheckboxToggle={handleCheckboxToggle} handlePriorityToggle={handlePriorityToggle} />
+        <List items={allItems} sortOrder={sortOption} handleDeleteItem={removeItemById} handleCheckboxToggle={handleCheckboxToggle} handlePriorityToggle={handlePriorityToggle} handleSort={handleSortSelection} />
       </div>
     </>
   );
+}
+
+/**
+ * A helper function to sort a list of items according to the specified type. The array will be sorted in place.
+ * @param {Array} items - The array of items to sort
+ * @param {string} sortOption - The sort type (e.g. alphabetical, priority first)
+ */
+function sortItems(items, sortOption) {
+  switch (sortOption) {
+    case "alphabetical":
+      items.sort((a, b) => {
+        if (a.title < b.title) {
+          return -1;
+        } else if (a.title > b.title) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+      break;
+
+    case "reverse-alphabetical":
+      items.sort((a, b) => {
+        if (a.title > b.title) {
+          return -1;
+        } else if (a.title < b.title) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+      break;
+
+    case "priority-first":
+      items.sort((a, b) => {
+        if (a.priority) {
+          // Item 'a' is a priority item so put it first (it doesn't matter if 'b' is also priority)
+          return -1;
+        } else if (b.priority) {
+          // Item 'b' is a priority item so put it first
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+      break;
+
+    case "priority-last":
+      items.sort((a, b) => {
+        if (!a.priority) {
+          // Item 'a' is a priority item so put it first (it doesn't matter if 'b' is also priority)
+          return -1;
+        } else if (!b.priority) {
+          // Item 'b' is a priority item so put it first
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+      break;
+  }
 }

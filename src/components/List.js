@@ -2,6 +2,7 @@ import { useState } from "react";
 import ListItem from "./ListItem";
 import { MdSort } from "react-icons/md";
 import { AnimatePresence } from "framer-motion";
+import { allSortingOptions } from "../utils/general";
 
 export default function List({ items, handleDeleteItem, handleCheckboxToggle, handlePriorityToggle, handleSort }) {
   // Create a state variable to keep track of the selected sort option
@@ -17,30 +18,16 @@ export default function List({ items, handleDeleteItem, handleCheckboxToggle, ha
         <div className="me-4">
           <span className="fw-bold">Sort:</span>&nbsp;&nbsp;
           <select className="custom-select" onChange={(e) => handleSort(e.target.value)}>
-            <option value="alphabetical">Alphabetical</option>
-            <option value="reverse-alphabetical">Reverse Alphabetical</option>
-            <option value="priority-first">Priority First</option>
-            <option value="priority-last">Priority Last</option>
-            <option value="completed-first">Completed First</option>
-            <option value="completed-last">Completed Last</option>
+            {allSortingOptions.map((sortOpt) => {
+              return <option value={sortOpt.id}>{sortOpt.title}</option>
+            })}
           </select>
-          {/* <button className="btn btn-success btn-sm dropdown-toggle" id="sort-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Sort <MdSort />
-          </button> */}
-
-          {/* Sorting options */}
-          {/* <div className="dropdown-menu" aria-labelledby="sort-dropdown">
-            <button className="dropdown-item" type="button">Alphabetical</button>
-            <button className="dropdown-item" type="button">Reverse Alphabetical</button>
-            <button className="dropdown-item" type="button">Priority First</button>
-            <button className="dropdown-item" type="button">Priority Last</button>
-          </div> */}
         </div>
       </div>
 
       <hr className="mx-4" />
 
-      {/* List of items */}
+      {/* List of items with animations for addition/deletion of items */}
       <div>
         <ul>
           <AnimatePresence>

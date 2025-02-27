@@ -1,8 +1,10 @@
 import { useState } from "react";
 import List from "./components/List";
 import NewItemForm from "./components/NewItemForm";
+import { sortOptionIsValid } from "./utils/general";
 
 export default function App() {
+  // state variables to manage the list of todo lists
   const [allItems, setAllItems] = useState([]); 
   const [sortOption, setSortOption] = useState("alphabetical");
   
@@ -87,6 +89,10 @@ export default function App() {
   // This function sorts 'items' by the selected sort order
   function handleSortSelection(selectedSortOption) {
     console.log("[App][sortItems] Selected: " + selectedSortOption);
+    if (!sortOptionIsValid(selectedSortOption)) {
+      // Given value is invalid, so exit.
+      return;
+    }
 
     let sortedItems = allItems.slice();
     sortItems(sortedItems, selectedSortOption);
@@ -109,93 +115,4 @@ export default function App() {
       </div>
     </>
   );
-}
-
-/**
- * A helper function to sort a list of items according to the specified type. The array will be sorted in place.
- * @param {Array} items - The array of items to sort
- * @param {string} sortOption - The sort type (e.g. alphabetical, priority first)
- */
-function sortItems(items, sortOption) {
-  switch (sortOption) {
-    case "alphabetical":
-      items.sort((a, b) => {
-        if (a.title < b.title) {
-          return -1;
-        } else if (a.title > b.title) {
-          return 1;
-        } else {
-          return 0;
-        }
-      });
-      break;
-
-    case "reverse-alphabetical":
-      items.sort((a, b) => {
-        if (a.title > b.title) {
-          return -1;
-        } else if (a.title < b.title) {
-          return 1;
-        } else {
-          return 0;
-        }
-      });
-      break;
-
-    case "priority-first":
-      items.sort((a, b) => {
-        if (a.priority) {
-          // Item 'a' is a priority item so put it first (it doesn't matter if 'b' is also priority)
-          return -1;
-        } else if (b.priority) {
-          // Item 'b' is a priority item so put it first
-          return 1;
-        } else {
-          return 0;
-        }
-      });
-      break;
-
-    case "priority-last":
-      items.sort((a, b) => {
-        if (!a.priority) {
-          // Item 'a' is a priority item so put it first (it doesn't matter if 'b' is also priority)
-          return -1;
-        } else if (!b.priority) {
-          // Item 'b' is a priority item so put it first
-          return 1;
-        } else {
-          return 0;
-        }
-      });
-      break;
-
-    case "completed-first":
-      items.sort((a, b) => {
-        if (a.completed) {
-          // Item 'a' is completed so put it first (it doesn't matter if 'b' is also completed)
-          return -1;
-        } else if (b.completed) {
-          // Item 'b' is completed so put it first
-          return 1;
-        } else {
-          return 0;
-        }
-      });
-      break;
-
-    case "completed-last":
-      items.sort((a, b) => {
-        if (!a.completed) {
-          // Item 'a' is completed so put it first (it doesn't matter if 'b' is also completed)
-          return -1;
-        } else if (!b.priority) {
-          // Item 'b' is completed so put it first
-          return 1;
-        } else {
-          return 0;
-        }
-      });
-      break;
-  }
 }

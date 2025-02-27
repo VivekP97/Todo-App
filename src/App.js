@@ -54,6 +54,7 @@ export default function App() {
     if (i >= 0) {
       // We were able to find the ID 
       newAllItems[i].completed = !!newVal;
+      sortItems(newAllItems, sortOption);
       setAllItems(newAllItems);
     }
   }
@@ -78,6 +79,7 @@ export default function App() {
     if (i >= 0) {
       // We were able to find the ID 
       newAllItems[i].priority = !newAllItems[i].priority;
+      sortItems(newAllItems, sortOption);
       setAllItems(newAllItems);
     }
   }

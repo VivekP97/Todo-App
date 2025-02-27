@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ListItem from "./ListItem";
 import { MdSort } from "react-icons/md";
+import { AnimatePresence } from "framer-motion";
 
 export default function List({ items, handleDeleteItem, handleCheckboxToggle, handlePriorityToggle, handleSort }) {
   // Create a state variable to keep track of the selected sort option
@@ -42,18 +43,20 @@ export default function List({ items, handleDeleteItem, handleCheckboxToggle, ha
       {/* List of items */}
       <div>
         <ul>
-          {items.map((item, i) => {
-            return (
-              <ListItem 
-                key={item.id}
-                itemIndex={i}
-                itemInfo={item} 
-                handleDeleteItem={handleDeleteItem} 
-                handleCheckboxToggle={handleCheckboxToggle} 
-                handlePriorityToggle={handlePriorityToggle}
-              />
-            );
-          })}
+          <AnimatePresence>
+            {items.map((item, i) => {
+              return (
+                <ListItem 
+                  key={item.id}
+                  itemIndex={i}
+                  itemInfo={item} 
+                  handleDeleteItem={handleDeleteItem} 
+                  handleCheckboxToggle={handleCheckboxToggle} 
+                  handlePriorityToggle={handlePriorityToggle}
+                />
+              );
+            })}
+          </AnimatePresence>
         </ul>
       </div>
     </>

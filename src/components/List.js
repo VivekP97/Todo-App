@@ -1,8 +1,12 @@
 import ListItem from "./ListItem";
 import { AnimatePresence } from "framer-motion";
 import { allSortingOptions } from "../utils/general";
+import { useTodoCtx } from "../contexts/TodoContext";
 
-export default function List({ items, handleDeleteItem, handleCheckboxToggle, handlePriorityToggle, handleSort }) {
+export default function List() {
+  // get the current list of items from the TodoContext
+  const { allTodoLists, selectedListIndex, handleSortSelection } = useTodoCtx();
+  const items = allTodoLists[selectedListIndex].items.slice();
 
   return (
     <>
@@ -12,7 +16,7 @@ export default function List({ items, handleDeleteItem, handleCheckboxToggle, ha
 
         <div className="me-4">
           <span className="fw-bold">Sort:</span>&nbsp;&nbsp;
-          <select className="custom-select" onChange={(e) => handleSort(e.target.value)}>
+          <select className="custom-select" onChange={(e) => handleSortSelection(e.target.value)}>
             {allSortingOptions.map((sortOpt) => {
               return <option value={sortOpt.id}>{sortOpt.title}</option>
             })}
@@ -31,10 +35,7 @@ export default function List({ items, handleDeleteItem, handleCheckboxToggle, ha
                 <ListItem 
                   key={item.id}
                   itemIndex={i}
-                  itemInfo={item} 
-                  handleDeleteItem={handleDeleteItem} 
-                  handleCheckboxToggle={handleCheckboxToggle} 
-                  handlePriorityToggle={handlePriorityToggle}
+                  itemInfo={item}
                 />
               );
             })}

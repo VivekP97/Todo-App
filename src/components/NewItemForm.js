@@ -1,5 +1,10 @@
 import { useState } from "react";
-export default function NewItemForm({handleNewItem}) {
+import { useTodoCtx } from "../contexts/TodoContext";
+
+export default function NewItemForm() {
+  // import state from TodoContext
+  const { addItemToList } = useTodoCtx();
+
   const [newItem, setNewItem] = useState("");
 
   /**
@@ -11,9 +16,9 @@ export default function NewItemForm({handleNewItem}) {
       return;
     }
 
-    // Call the callback function to handle this item
+    // Call the function to handle adding this item
     // NOTE: The item is supposed to be an object, not just the text as a string.
-    handleNewItem({id: crypto.randomUUID(), title: newItem, lastModifiedTime: new Date(), completed: false});
+    addItemToList({id: crypto.randomUUID(), title: newItem, lastModifiedTime: new Date(), completed: false});
 
     // Clear the input field
     setNewItem("");

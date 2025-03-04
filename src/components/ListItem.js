@@ -2,8 +2,12 @@ import "../styles/main.css";
 import { MdDelete } from "react-icons/md";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { useTodoCtx } from "../contexts/TodoContext";
 
-export default function ListItem({ itemInfo, itemIndex, handleDeleteItem, handleCheckboxToggle, handlePriorityToggle }) {
+export default function ListItem({ itemInfo, itemIndex }) {
+  // import state from TodoContext
+  const {removeItemById, handleCheckboxToggle, handlePriorityToggle} = useTodoCtx();
+
   return (
     <motion.li layout 
               key={itemInfo.id} 
@@ -23,7 +27,7 @@ export default function ListItem({ itemInfo, itemIndex, handleDeleteItem, handle
 
       {/* Icon to delete an item */}
       <div className="ms-auto me-4">
-        <MdDelete className="li-icon delete-icon" onClick={() => {handleDeleteItem(itemInfo.id)}}/>
+        <MdDelete className="li-icon delete-icon" onClick={() => {removeItemById(itemInfo.id)}}/>
       </div>
     </motion.li>
   );

@@ -6,7 +6,7 @@ import { allSortingOptions } from "../utils/general";
 
 export default function List({ items, handleDeleteItem, handleCheckboxToggle, handlePriorityToggle, handleSort }) {
   // Create a state variable to keep track of the selected sort option
-  const [sortOption, setSortOption] = useState("alphabetical");
+  //const [sortOption, setSortOption] = useState("alphabetical");
   //const [sortedItems, setSortedItems] = useState(items.slice());
 
   return (

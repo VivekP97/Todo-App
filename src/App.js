@@ -4,8 +4,7 @@ import NewItemForm from "./components/NewItemForm";
 import { sortOptionIsValid, sortItems } from "./utils/general";
 
 export default function App() {
-  // state variables to manage the list of todo lists
-  //const [allItems, setAllItems] = useState([]); 
+  // state variables to manage the list of todo lists 
   const [allTodoLists, setAllTodoLists] = useState([
     {
       name: "Untitled List",
@@ -14,9 +13,11 @@ export default function App() {
     }
   ]);
   const [selectedListIndex, setSelectedListIndex] = useState(0);
-  //const [sortOption, setSortOption] = useState("alphabetical");
   
-  /* This function adds the given item to the current list. */
+  /**
+   * This function adds the given item to the current list.
+   * @param {Object} newItem - The new list item to add to the current list.
+   * */
   function addItemToList(newItem) {
     // Don't add item if the title is empty.
     if (!newItem || !newItem.title) {
@@ -32,14 +33,16 @@ export default function App() {
 
     // re-sort the items
     sortItems(currList.items, currList.sortOption);
-    //currList.items = newItemsList;
 
     // Update the list state in 'allTodoLists'
     localAllTodoLists[selectedListIndex] = currList;
     setAllTodoLists(localAllTodoLists);
   }
 
-  /* This function removes the specified item from the list. */
+  /**
+   * This function removes the specified item from the list.
+   * @param {string} id - The ID of the item to remove from the current list.
+   */
   function removeItemById(id) {
     // copy the state variable
     let localAllTodoLists = allTodoLists.slice();
@@ -59,8 +62,8 @@ export default function App() {
 
   /** 
    * This function handles when a list item (checkbox) is toggled. 
-   * @param id - The ID of the list item to toggle
-   * @param newVal - The new state of the checkbox
+   * @param {string} id - The ID of the list item to toggle
+   * @param {boolean} newVal - The new state of the checkbox
    * */
   function handleCheckboxToggle(id, newVal) {
     console.log("[App][handleCheckboxToggle] Triggered for: ", id, newVal);
@@ -90,8 +93,8 @@ export default function App() {
 
   /** 
    * This function handles when a list item's priority setting is toggled. 
-   * @param id - The ID of the list item to toggle
-   * @param newVal - The new state of the toggle
+   * @param {string} id - The ID of the list item to toggle
+   * @param {boolean} newVal - The new state of the toggle
    * */
   function handlePriorityToggle(id, newVal) {
     console.log("[App][handlePriorityToggle] Triggered for: ", id);
@@ -119,7 +122,10 @@ export default function App() {
     }
   }
 
-  // This function sorts 'items' by the selected sort order
+  /**
+   * This function sorts 'items' by the selected sort order
+   * @param {string} selectedSortOption - The ID of the sort option selected from the dropdown.
+   */
   function handleSortSelection(selectedSortOption) {
     console.log("[App][sortItems] Selected: " + selectedSortOption);
     if (!sortOptionIsValid(selectedSortOption)) {

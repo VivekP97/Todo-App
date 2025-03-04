@@ -2,7 +2,9 @@ import { useState } from "react";
 export default function NewItemForm({handleNewItem}) {
   const [newItem, setNewItem] = useState("");
 
-  /* This function handles when the user clicks "Add Item" */
+  /**
+   * This function handles when the user clicks the "Add Item" button.
+   * */
   function handleAddItem() {
     if (!newItem) {
       // The item text is empty, so don't add it.
@@ -17,7 +19,9 @@ export default function NewItemForm({handleNewItem}) {
     setNewItem("");
   }
 
-  /* Handle keydown events for the input field */
+  /**
+   * Handle keydown events for the input field.
+   * */
   function handleKeyDown(e) {
     if (e.key === "Enter") {
       // The Enter key was pressed, so try to add the item in the input field.

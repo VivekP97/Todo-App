@@ -1,0 +1,22 @@
+/* Style for the whole Sidebar container */
+.sidebar-container {
+  background-color: #fafafa;
+  height: 100%;
+  position: absolute;
+  top: 0;
+}
+
+/* Style for the list of todo lists container */
+.list-of-lists {
+  list-style: none;
+  padding-left: 0;
+}
+.list-of-lists > li:hover {
+  cursor: pointer;
+  background-color: #e3e2e2;
+}
+
+/* Style for the selected todo list */
+.selected-todo-list {
+  background-color: #ddffea !important;
+}

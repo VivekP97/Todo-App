@@ -30,15 +30,19 @@ export default function List() {
       <div>
         <ul>
           <AnimatePresence>
-            {items.map((item, i) => {
-              return (
-                <ListItem 
-                  key={item.id}
-                  itemIndex={i}
-                  itemInfo={item}
-                />
-              );
-            })}
+            {
+              items.length === 0 ? 
+              <p className="text-center fst-italic">No items to display</p> :
+              items.map((item, i) => {
+                return (
+                  <ListItem 
+                    key={item.id}
+                    itemIndex={i}
+                    itemInfo={item}
+                  />
+                );
+              })
+            }
           </AnimatePresence>
         </ul>
       </div>

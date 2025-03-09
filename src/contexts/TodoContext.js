@@ -148,8 +148,18 @@ export function TodoProvider({ children }) {
     setAllTodoLists(localAllTodoLists);
   }
 
+  /**
+   * This function is used to add the given list to 'allTodoLists'
+   * @param {Object} newList
+   */
+  function addNewList(newList) {
+    let localAllTodoLists = allTodoLists.slice();
+    localAllTodoLists.push(newList);
+    setAllTodoLists(localAllTodoLists);
+  }
+
   return (
-    <TodoContext.Provider value={{ addItemToList, allTodoLists, selectedListIndex, handleSortSelection, removeItemById, handleCheckboxToggle, handlePriorityToggle }}>
+    <TodoContext.Provider value={{ addItemToList, allTodoLists, selectedListIndex, handleSortSelection, removeItemById, handleCheckboxToggle, handlePriorityToggle, addNewList }}>
       {children}
     </TodoContext.Provider>
   );

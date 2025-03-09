@@ -158,8 +158,16 @@ export function TodoProvider({ children }) {
     setAllTodoLists(localAllTodoLists);
   }
 
+  /**
+   * This function is called to programmatically select a list from the sidebar.
+   * @param {int} listIndex - The index of the list to select
+   */
+  function handleSelectList(i) {
+    setSelectedListIndex(i);
+  }
+
   return (
-    <TodoContext.Provider value={{ addItemToList, allTodoLists, selectedListIndex, handleSortSelection, removeItemById, handleCheckboxToggle, handlePriorityToggle, addNewList }}>
+    <TodoContext.Provider value={{ addItemToList, allTodoLists, selectedListIndex, handleSelectList, handleSortSelection, removeItemById, handleCheckboxToggle, handlePriorityToggle, addNewList }}>
       {children}
     </TodoContext.Provider>
   );

@@ -6,7 +6,7 @@ import Modal from "bootstrap/js/dist/modal"; // Import Bootstrap's JS Modal
 import 'bootstrap/dist/css/bootstrap.css';
 
 export default function Sidebar() {
-  const { allTodoLists, selectedListIndex, addNewList } = useTodoCtx();
+  const { allTodoLists, selectedListIndex, handleSelectList, addNewList } = useTodoCtx();
   const [newListName, setNewListName] = useState("");
 
   // Create a state variable to keep track of which mode to use for the modal (i.e. add or update a todo list).
@@ -83,7 +83,7 @@ export default function Sidebar() {
         <div>
           <ul className="list-of-lists">
             {allTodoLists.map((list, i) => {
-              return <li key={list.name} className={"todo-list py-2 px-3 " + (i === selectedListIndex ? "selected-todo-list" : "")}><FaList className="mb-1" />&nbsp;&nbsp;{list.name}</li>
+              return <li key={list.name} className={"todo-list py-2 px-3 " + (i === selectedListIndex ? "selected-todo-list" : "")} onClick={() => handleSelectList(i)}><FaList className="mb-1" />&nbsp;&nbsp;{list.name}</li>
             })}
           </ul>
         </div>

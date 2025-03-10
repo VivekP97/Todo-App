@@ -162,12 +162,46 @@ export function TodoProvider({ children }) {
    * This function is called to programmatically select a list from the sidebar.
    * @param {int} listIndex - The index of the list to select
    */
-  function handleSelectList(i) {
-    setSelectedListIndex(i);
+  function handleSelectList(listIndex) {
+    setSelectedListIndex(listIndex);
+  }
+
+  /**
+   * This function is used to delete a list from 'allTodoLists'.
+   * @param {int} listIndex - The index of the list to delete
+   */
+  function handleDeleteList(listIndex) {
+    // Don't allow users to delete all lists
+    if (allTodoLists.length === 1) {
+      return;
+    }
+
+    // Validate the index
+    if (listIndex < 0 || listIndex >= allTodoLists.length) {
+      // The given index is outside the bounds of 'allTodoLists'
+      return;
+    }
+
+    // Use the functional form of setState to modify multiple state variables without causing a race condition
+    setAllTodoLists(prevLists => {
+      // Create a new array excluding the one to delete
+      // NOTE: We don't use slice() here because it only creates a shallow copy 
+      const newAllTodoLists = prevLists.filter((_, i) => {
+        return listIndex !== i;
+      });
+
+      // Update the selected list if the 'selectedListIndex' is no longer valid.
+      setSelectedListIndex(prevIndex => {
+        // If the index is out of bounds, then select the last list
+        return prevIndex >= newAllTodoLists.length ? newAllTodoLists.length - 1 : prevIndex;
+      });
+
+      return newAllTodoLists;
+    });
   }
 
   return (
-    <TodoContext.Provider value={{ addItemToList, allTodoLists, selectedListIndex, handleSelectList, handleSortSelection, removeItemById, handleCheckboxToggle, handlePriorityToggle, addNewList }}>
+    <TodoContext.Provider value={{ addItemToList, allTodoLists, selectedListIndex, handleSelectList, handleDeleteList, handleSortSelection, removeItemById, handleCheckboxToggle, handlePriorityToggle, addNewList }}>
       {children}
     </TodoContext.Provider>
   );

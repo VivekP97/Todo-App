@@ -2,11 +2,12 @@ import { useState, useRef, useEffect } from "react";
 import { useTodoCtx } from "../contexts/TodoContext";
 import "../styles/sidebar.css";
 import { FaList } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 import Modal from "bootstrap/js/dist/modal"; // Import Bootstrap's JS Modal
 import 'bootstrap/dist/css/bootstrap.css';
 
 export default function Sidebar() {
-  const { allTodoLists, selectedListIndex, handleSelectList, addNewList } = useTodoCtx();
+  const { allTodoLists, selectedListIndex, handleSelectList, handleDeleteList, addNewList } = useTodoCtx();
   const [newListName, setNewListName] = useState("");
 
   // Create a state variable to keep track of which mode to use for the modal (i.e. add or update a todo list).
@@ -23,6 +24,11 @@ export default function Sidebar() {
       // Add an event listener for when the modal closes so we can clear the input field
       modalRef.current.addEventListener("hidden.bs.modal", () => {
         setNewListName("");
+      });
+
+      // Add an event listener for when the modal opens so we can focus the input field
+      modalRef.current.addEventListener("shown.bs.modal", () => {
+        document.getElementById("new-list-name-input").focus();
       });
     }
   }, []);
@@ -83,7 +89,11 @@ export default function Sidebar() {
         <div>
           <ul className="list-of-lists">
             {allTodoLists.map((list, i) => {
-              return <li key={list.name} className={"todo-list py-2 px-3 " + (i === selectedListIndex ? "selected-todo-list" : "")} onClick={() => handleSelectList(i)}><FaList className="mb-1" />&nbsp;&nbsp;{list.name}</li>
+              return (
+                <li key={list.name} className={"todo-list d-flex align-items-center justify-content-between py-2 px-3 " + (i === selectedListIndex ? "selected-todo-list" : "")} onClick={() => handleSelectList(i)}>
+                  <div className="d-inline-block"><FaList className="mb-1" />&nbsp;&nbsp;{list.name}</div>
+                  <div className="delete-list-icon mb-2"><MdDelete onClick={() => handleDeleteList(i)} /></div>
+                </li>)
             })}
           </ul>
         </div>
@@ -106,6 +116,7 @@ export default function Sidebar() {
               {/* Modal Body */}
               <div className="modal-body">
               <input 
+                id="new-list-name-input"
                 type="text" 
                 value={newListName} 
                 className="form-control w-100" 

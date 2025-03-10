@@ -20,3 +20,13 @@
 .selected-todo-list {
   background-color: #ddffea !important;
 }
+
+/* Style for the icon to delete lists */
+.delete-list-icon {
+  width: 1em;
+  color: grey;
+  font-size: 1.5em;
+}
+.delete-list-icon:hover {
+  color: red;
+}

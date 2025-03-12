@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { useTodoCtx } from "../contexts/TodoContext";
 import "../styles/sidebar.css";
 import { FaList, FaRegEdit } from "react-icons/fa";
@@ -19,6 +19,10 @@ export default function Sidebar() {
 
   // Create a state var to indicate which list to update (when in edit mode)
   const [listToEditIndex, setListToEditIndex] = useState(0);
+
+  // This memoized var indicates whether to disable the Create/Update button in the modal based on the name
+  // NOTE: Using a memoized variable ensures that React only re-computes this value on renders when one of the dependent values have changed.
+  const shouldDisableSave = useMemo(() => newNameIsInvalid(), [newListName]);
 
   useEffect(() => {
     if (modalRef.current) {
@@ -109,6 +113,24 @@ export default function Sidebar() {
     modalInstance.show();
   }
 
+  /**
+   * This function is used to indicate whether the name inputted in the modal is invalid.
+   * The name cannot be empty or a duplicate of an existing list.
+   * @return {boolean} - A boolean indicating whether the name is invalid.
+   */
+  function newNameIsInvalid() {
+    if (!newListName) {
+      // List is empty, so disable save
+      return true;
+    } else if (allTodoLists.some(obj => obj.name === newListName)) {
+      // We found a list with the inputted name, so disable save
+      return true;
+    }
+
+    // No issues were found so enable save.
+    return false;
+  }
+
   return (
     <>
       <div className="sidebar-container col-3 col-md-2 d-flex flex-column">
@@ -160,7 +182,7 @@ export default function Sidebar() {
               {/* Modal Footer */}
               <div className="modal-footer">
                 <button type="button" className="btn btn-outline-danger" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" className="btn btn-success" data-bs-dismiss="modal" onClick={() => handleSave()} disabled={!newListName}>{manageTodoListMode === "add" ? "Create" : "Update"}</button>
+                <button type="button" className="btn btn-success" data-bs-dismiss="modal" onClick={() => handleSave()} disabled={shouldDisableSave}>{manageTodoListMode === "add" ? "Create" : "Update"}</button>
               </div>
             </div>
           </div>

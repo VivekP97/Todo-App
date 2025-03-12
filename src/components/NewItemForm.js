@@ -26,6 +26,7 @@ export default function NewItemForm() {
 
   /**
    * Handle keydown events for the input field.
+   * @param {Object} e - The Javascript event object that is fired 
    * */
   function handleKeyDown(e) {
     if (e.key === "Enter") {

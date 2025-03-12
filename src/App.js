@@ -7,6 +7,7 @@ export default function App() {
 
   return (
     <>
+      {/* Wrap all the app contents with the TodoProvider for the TodoContext so we can access state everywhere */}
       <TodoProvider>
         {/* Sidebar to manage todo lists */}
         <Sidebar />

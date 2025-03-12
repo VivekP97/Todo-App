@@ -199,7 +199,7 @@ export function TodoProvider({ children }) {
       return newAllTodoLists;
     });
   }
-
+  
   return (
     <TodoContext.Provider value={{ addItemToList, allTodoLists, setAllTodoLists, selectedListIndex, handleSelectList, handleDeleteList, handleSortSelection, removeItemById, handleCheckboxToggle, handlePriorityToggle, addNewList }}>
       {children}

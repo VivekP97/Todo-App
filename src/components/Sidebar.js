@@ -42,15 +42,6 @@ export default function Sidebar() {
   }, []);
 
   /**
-   * This function is used to programmatically open the modal
-   */
-  function openModal() {
-    if (modalInstance) {
-      modalInstance.show();
-    }
-  }
-
-  /**
    * This function is called when the user wants to save changes for the creation or update of a todo list.
    */
   function handleSave() {
@@ -82,16 +73,6 @@ export default function Sidebar() {
 
       // Update todo list
       modalInstance.hide();
-    }
-  }
-
-  /**
-   * Handle keydown events for the input field.
-   * */
-  function handleKeyDown(e) {
-    if (e.key === "Enter") {
-      // The Enter key was pressed, so try to save the changes for the todo list.
-      handleSave();
     }
   }
 
@@ -140,9 +121,12 @@ export default function Sidebar() {
             {allTodoLists.map((list, i) => {
               return (
                 <li key={list.name} className={"todo-list d-flex align-items-center justify-content-between py-2 px-3 " + (i === selectedListIndex ? "selected-todo-list" : "")} onClick={() => handleSelectList(i)}>
+                  {/* List name */}
                   <div className="d-inline-block">
                     <FaList className="mb-1" />&nbsp;&nbsp;{list.name}
                   </div>
+
+                  {/* Buttons to edit/delete a list */}
                   <div className="d-flex">
                     <FaRegEdit className="edit-list-icon me-1" onClick={() => selectListToEdit(i)} />
                     <MdDelete className="delete-list-icon" onClick={() => handleDeleteList(i)} />

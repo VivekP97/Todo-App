@@ -23,10 +23,18 @@
 
 /* Style for the icon to delete lists */
 .delete-list-icon {
-  width: 1em;
   color: grey;
   font-size: 1.5em;
 }
 .delete-list-icon:hover {
   color: red;
+}
+
+/* Style for the icon to edit a list's name */
+.edit-list-icon {
+  color: grey;
+  font-size: 1.4em;
+}
+.edit-list-icon:hover {
+  color: black;
 }

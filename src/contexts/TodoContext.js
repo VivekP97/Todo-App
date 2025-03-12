@@ -201,7 +201,7 @@ export function TodoProvider({ children }) {
   }
 
   return (
-    <TodoContext.Provider value={{ addItemToList, allTodoLists, selectedListIndex, handleSelectList, handleDeleteList, handleSortSelection, removeItemById, handleCheckboxToggle, handlePriorityToggle, addNewList }}>
+    <TodoContext.Provider value={{ addItemToList, allTodoLists, setAllTodoLists, selectedListIndex, handleSelectList, handleDeleteList, handleSortSelection, removeItemById, handleCheckboxToggle, handlePriorityToggle, addNewList }}>
       {children}
     </TodoContext.Provider>
   );
